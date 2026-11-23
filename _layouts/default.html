@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
+</head>
+<body>
+  <header class="sn-header">
+    <div class="sn-header-inner">
+      <a class="sn-brand" href="{{ site.baseurl }}/">
+        <span class="sn-brand-mark" aria-hidden="true">
+          <i class="sn-dot sn-dot-red"></i><i class="sn-dot sn-dot-blue"></i><i class="sn-dot sn-dot-green"></i><i class="sn-dot sn-dot-yellow"></i>
+        </span>
+        <span class="sn-brand-text">四色笔记<span class="sn-brand-sub">官方模板与精选笔记</span></span>
+      </a>
+      <nav class="sn-nav" aria-label="主导航">
+        <a href="{{ site.baseurl }}/">首页</a>
+        <a href="{{ site.baseurl }}/templates/">官方模板</a>
+        <a href="{{ site.baseurl }}/featured-notes/">精选笔记</a>
+        <a href="https://sisenote.com" target="_blank" rel="noopener">官方网站</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="sn-main">
+    {% if page.type == 'template' or page.type == 'featured' %}
+    <div class="sn-docbar">
+      {% if page.category %}<span class="sn-docbar-tag">{{ page.category }}</span>{% endif %}
+      <button type="button" class="sn-copy-btn" data-sn-copy>
+        <span class="sn-copy-icon" aria-hidden="true">⧉</span> 复制到四色笔记
+      </button>
+    </div>
+    <p class="sn-copy-hint">复制后在四色笔记新建文档粘贴即可。颜色与格式能否完整保留，以实际粘贴效果为准。</p>
+    {% endif %}
+
+    <article class="sn-article" id="sn-article">
+      {{ content }}
+    </article>
+  </main>
+
+  {% if page.type == 'template' or page.type == 'featured' %}
+  <button type="button" class="sn-fab" data-sn-copy aria-label="复制到四色笔记" title="复制到四色笔记">复制</button>
+  <div id="sn-toast" class="sn-toast" role="status" aria-live="polite"></div>
+  {% endif %}
+
+  <footer class="sn-footer">
+    <div class="sn-footer-inner">
+      <span>四色笔记（SiSeNote） · 上海舱屿科技有限公司</span>
+      <a href="https://sisenote.com" target="_blank" rel="noopener">sisenote.com</a>
+    </div>
+  </footer>
+
+  <script src="{{ site.baseurl }}/assets/js/copy.js" defer></script>
+</body>
+</html>
