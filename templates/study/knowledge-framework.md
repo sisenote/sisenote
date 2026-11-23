@@ -2,7 +2,7 @@
 layout: default
 title: 知识体系整理模板
 description: 用多级标题搭建知识框架，按四色语义区分概念、重点与易错的通用整理模板。
-category: 知识整理
+category: 学习提升
 tags:
   - 知识整理
   - 结构化

@@ -1,8 +1,8 @@
 ---
 layout: default
-title: 英语知识笔记示例
+title: 定语从句关系词的选择
 description: 以定语从句为例，梳理关系词选择规则与常见易错点的原创英语语法笔记。
-category: 英语
+category: 英语语言
 tags:
   - 英语
   - 语法

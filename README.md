@@ -2,7 +2,7 @@
 
 **让知识有结构，让重点有颜色，让复习更高效。**
 
-[官方网站](https://sisenote.com)
+[官方网站](https://sisenote.com) · [在线浏览模板与笔记](https://sisenote.github.io/sisenote/)
 
 ## 项目介绍
 

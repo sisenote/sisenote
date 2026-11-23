@@ -1,41 +1,36 @@
 ---
 layout: default
 title: 精选笔记
-description: 四色笔记官方精选原创知识笔记，展示四色标注、知识结构与复习方法。
+description: 四色笔记官方精选原创知识笔记，覆盖学习方法、语文、数学、英语与多行业知识，展示四色标注与知识结构。
 ---
 
 # 精选笔记
 
-这些笔记由上海舱屿科技有限公司原创，用于展示四色标注、知识结构与复习方法在真实学习场景中的应用。打开任意笔记，点击「复制到四色笔记」即可粘贴阅读与继续编辑。
+这些笔记由上海舱屿科技有限公司原创，覆盖五大类、共 80 篇，展示四色标注、知识结构与复习方法在真实知识场景中的应用。打开任意笔记，点击「复制到四色笔记」即可粘贴阅读与继续编辑。
 
-<div class="sn-card-grid">
+{% assign accents = "red,green,blue,yellow,red" | split: "," %}
 
-<a class="sn-card" href="{{ site.baseurl }}/featured-notes/learning-method/knowledge-note-method.html">
-  <span class="sn-card-accent red"></span>
-  <p class="sn-card-title">四色知识笔记法</p>
-  <p class="sn-card-desc">用四种颜色给知识分类，把记录、理解与主动回忆串成完整学习闭环。</p>
-  <div class="sn-card-meta"><span class="sn-tag">学习方法</span><span class="sn-tag">知识管理</span><span class="sn-card-link">查看笔记 →</span></div>
-</a>
+{% assign feat_pages = site.pages | where: "type", "featured" %}
 
-<a class="sn-card" href="{{ site.baseurl }}/featured-notes/chinese/chinese-knowledge-example.html">
-  <span class="sn-card-accent green"></span>
-  <p class="sn-card-title">语文知识笔记示例</p>
-  <p class="sn-card-desc">以文言实词「之」为例，展示一词多义的归纳、辨析与易错提醒。</p>
-  <div class="sn-card-meta"><span class="sn-tag">语文</span><span class="sn-tag">文言实词</span><span class="sn-card-link">查看笔记 →</span></div>
-</a>
-
-<a class="sn-card" href="{{ site.baseurl }}/featured-notes/mathematics/mathematics-knowledge-example.html">
-  <span class="sn-card-accent blue"></span>
-  <p class="sn-card-title">数学知识笔记示例</p>
-  <p class="sn-card-desc">以函数单调性为例，演示概念、重点、思路与易错四色标注的完整写法。</p>
-  <div class="sn-card-meta"><span class="sn-tag">数学</span><span class="sn-tag">函数</span><span class="sn-card-link">查看笔记 →</span></div>
-</a>
-
-<a class="sn-card" href="{{ site.baseurl }}/featured-notes/english/english-knowledge-example.html">
-  <span class="sn-card-accent yellow"></span>
-  <p class="sn-card-title">英语知识笔记示例</p>
-  <p class="sn-card-desc">以定语从句为例，梳理关系词选择规则与常见易错点。</p>
-  <div class="sn-card-meta"><span class="sn-tag">英语</span><span class="sn-tag">语法</span><span class="sn-card-link">查看笔记 →</span></div>
-</a>
-
+{% for cat in site.data.featured-cats %}
+<div class="sn-section" id="note-{{ cat.slug }}">
+  <div class="sn-section-head">
+    <h2>{{ cat.name }} <span class="sn-cat-count">{{ cat.count }} 篇</span></h2>
+  </div>
+  <p class="sn-section-desc">{{ cat.desc }}</p>
+  <div class="sn-card-grid">
+    {% assign cat_pages = feat_pages | where: "category", cat.name | sort: "title" %}
+    {% for p in cat_pages %}
+    <a class="sn-card" href="{{ site.baseurl }}{{ p.url }}">
+      <span class="sn-card-accent {{ accents[forloop.index0] }}"></span>
+      <p class="sn-card-title">{{ p.title }}</p>
+      <p class="sn-card-desc">{{ p.description }}</p>
+      <div class="sn-card-meta">
+        {% for tag in p.tags limit:2 %}<span class="sn-tag">{{ tag }}</span>{% endfor %}
+        <span class="sn-card-link">查看详情 →</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
 </div>
+{% endfor %}

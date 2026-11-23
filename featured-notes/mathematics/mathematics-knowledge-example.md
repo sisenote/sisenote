@@ -1,8 +1,8 @@
 ---
 layout: default
-title: 数学知识笔记示例
+title: 函数的单调性
 description: 以函数单调性为例，演示概念、重点、思路与易错四色标注完整写法的原创知识笔记。
-category: 数学
+category: 数学理工
 tags:
   - 数学
   - 函数

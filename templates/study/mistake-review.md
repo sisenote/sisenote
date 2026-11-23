@@ -2,7 +2,7 @@
 layout: default
 title: 错题复盘模板
 description: 记录错因、正确思路与同类题提醒，把错题变成提分点的复盘模板。
-category: 错题复盘
+category: 学习提升
 tags:
   - 错题
   - 复盘

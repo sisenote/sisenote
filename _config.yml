@@ -4,11 +4,11 @@
 title: 四色笔记 · 官方模板与精选笔记
 description: 四色笔记官方原创模板与精选知识笔记。让知识有结构，让重点有颜色，让复习更高效。
 
-# GitHub Pages 项目站点部署在子路径下（https://<账号>.github.io/<仓库名>/）。
-# baseurl 填写仓库名（以 / 开头、结尾不带 /），所有站内链接与静态资源都通过 site.baseurl 生成。
-# 如果以后改用自定义域名部署到根路径，把 baseurl 改成空字符串即可。
+# GitHub Pages 对外访问地址：https://sisenote.github.io/sisenote/
+# url = 站点域名；baseurl = 仓库名子路径（以 / 开头、结尾不带 /）。
+# 所有站内链接与静态资源都通过 site.baseurl 生成，canonical 通过 site.url + site.baseurl 生成。
+url: "https://sisenote.github.io"
 baseurl: "/sisenote"
-url: ""
 
 # Markdown 渲染器（GitHub Pages 原生支持 kramdown）
 markdown: kramdown

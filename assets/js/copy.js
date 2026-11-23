@@ -14,11 +14,14 @@
 (function () {
   'use strict';
 
+  // 官方四色文字色 = 四色笔记编辑器白名单（EditorConstants.FONT_COLOR_MAP a1~a4）。
+  // ⛔ 必须用这几个精确 hex：sanitizer 只认白名单，其余颜色粘贴时被整块丢弃（变黑字）。
+  // 事实源：sisenote-web/src/common/constants/EditorConstants.ts
   var COLOR_CSS = {
-    red: 'color: #d94f5c;',
-    blue: 'color: #3479c8;',
-    green: 'color: #238567;',
-    yellow: 'color: #a97812;'
+    red: 'color: #FF5555;',
+    blue: 'color: #005CFF;',
+    green: 'color: #01BD33;',
+    yellow: 'color: #FFCD1C;'
   };
   var COLOR_LABEL = {
     red: '重点',

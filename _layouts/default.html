@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+  <link rel="icon" type="image/svg+xml" href="{{ site.baseurl }}/assets/images/favicon.svg">
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
 </head>
 <body>
   <header class="sn-header">
     <div class="sn-header-inner">
       <a class="sn-brand" href="{{ site.baseurl }}/">
-        <span class="sn-brand-mark" aria-hidden="true">
-          <i class="sn-dot sn-dot-red"></i><i class="sn-dot sn-dot-blue"></i><i class="sn-dot sn-dot-green"></i><i class="sn-dot sn-dot-yellow"></i>
-        </span>
-        <span class="sn-brand-text">四色笔记<span class="sn-brand-sub">官方模板与精选笔记</span></span>
+        <img class="sn-brand-logo" src="{{ site.baseurl }}/assets/images/brand-logo.svg" alt="四色笔记 Logo">
+        <img class="sn-brand-wordmark" src="{{ site.baseurl }}/assets/images/sisenote-font.svg" alt="四色笔记 SiSeNote">
+        <span class="sn-brand-sub">官方模板与精选笔记</span>
       </a>
       <nav class="sn-nav" aria-label="主导航">
         <a href="{{ site.baseurl }}/">首页</a>

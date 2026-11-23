@@ -2,7 +2,7 @@
 layout: default
 title: 学习计划模板
 description: 把长期目标拆解为阶段任务与每周安排，持续跟踪进度的学习计划模板。
-category: 学习方法
+category: 学习提升
 tags:
   - 学习计划
   - 目标管理

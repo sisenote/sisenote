@@ -36,7 +36,8 @@ type: template   # 模板用 template，精选笔记用 featured
 
 - `class` 控制本站显示颜色；`data-sisenote-color` 供复制脚本识别语义，转成纯文本标签【重点】【概念】【思路】【易错】。
 - 只标注真正需要强调的内容，避免整篇五颜六色。
-- 调整品牌色时，改 CSS 变量即可；若改了颜色值，请同步更新 `assets/js/copy.js` 顶部的 `COLOR_CSS` 内联样式常量，保证复制到外部编辑器后颜色一致。
+
+**⛔ 四色色值不可自造（2026-11-23 踩坑）**：四色笔记编辑器粘贴时只认官方白名单色值 —— 红 `#FF5555`、蓝 `#005CFF`、绿 `#01BD33`、黄 `#FFCD1C`（事实源 `sisenote-web/src/common/constants/EditorConstants.ts` 的 `FONT_COLOR_MAP` a1~a4）。`assets/js/copy.js` 的 `COLOR_CSS` 已输出这四个精确 hex。若改成其它任何颜色（哪怕肉眼接近），粘贴进四色笔记时 `StyleSanitizer` 会把颜色 mark 整块丢弃，文字变黑，颜色语义全丢。改色前务必确认新值在编辑器白名单内，并同步 CSS 变量与 `COLOR_CSS` 两处。
 
 ## 三、复制功能说明
 
@@ -68,7 +69,15 @@ jekyll serve
 
 保存后即可启用。
 
-## 六、已知未验证事项
+## 六、粘贴还原验证情况（2026-11-23 已验证）
 
-- **四色笔记真实编辑器粘贴效果尚未验证**：当前未连接真实四色笔记 APP / Web 编辑器，无法确认 HTML 剪贴板中的颜色与富文本格式能被编辑器完整还原。因此脚本始终同时提供纯文本格式作为兜底，并在页面上明确提示「颜色与格式能否完整保留，以实际粘贴效果为准」。发布前应在真实编辑器中粘贴一次，确认效果后再决定是否调整 `COLOR_CSS` 或复制策略。
-- 内容均为上海舱屿科技有限公司原创示例，未收录任何第三方教材全文或真实用户个人信息；如后续扩充内容，须继续遵守 [内容使用许可](../LICENSE-CONTENT.md) 与原创原则。
+用四色笔记共享编辑器的真实测试基建（`sisenote-web/src/editor/core/ClipboardRoundTrip.test.ts` 同源：真实 Tiptap Editor + `createExtensions` + `createClipboardProps` + 合成 paste 事件）验证本站 `copy.js` 的输出：
+
+- ✅ 官方四色 `#FF5555 / #005CFF / #01BD33 / #FFCD1C` 内联 span 粘贴后，四个 `textStyle` 颜色 mark 全部还原。
+- ✅ `copy.js` 输出的完整 `<html><body>…` 外壳形态同样能正确还原颜色。
+- ✅ 对照实验：初版自造色 `#d94f5c` 粘贴后颜色被 `StyleSanitizer` 整块丢弃（变黑字）—— 这就是必须锁定官方白名单色值的原因。
+- 结论：Web 编辑器侧富文本颜色还原已验证。APP 端（Android / 鸿蒙 / iOS）WebView 用的是同一套共享编辑器产物，但**未在真机逐端实测**；纯文本格式始终作为兜底同时写入。
+
+## 七、内容合规
+
+内容均为上海舱屿科技有限公司原创，覆盖 10 个分类共 160 篇，未收录任何第三方教材全文或真实用户个人信息；如后续扩充内容，须继续遵守 [内容使用许可](../LICENSE-CONTENT.md) 与原创原则。

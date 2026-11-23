@@ -2,7 +2,7 @@
 layout: default
 title: 通用笔记模板
 description: 一个干净的四色起步骨架，适合任何学科与主题的笔记记录。
-category: 通用
+category: 通用记录
 tags:
   - 通用
   - 四色标注
@@ -16,35 +16,53 @@ type: template
 
 ## 一、主题介绍
 
-一句话说明这篇笔记记录什么：
+一句话说明这篇笔记记录什么，以及它属于哪个知识模块，方便日后检索。
 
-> [在这里写下主题简介]
+> 【在这里写下主题简介：这门知识讲什么、我用它来解决什么问题】
+
+- 所属领域：【如 数学 / 编程 / 历史 / 职场】
+- 记录目的：【如 备考复习 / 项目查阅 / 日常积累】
+- 更新周期：【如 每周回顾一次】
 
 ## 二、核心内容
 
+按四色语义把知识分成四块，只给真正需要强调的关键词句上色，普通叙述保持黑色正文。
+
 ### 1. 基础概念
 
-- <span class="sn-blue" data-sisenote-color="blue">概念：[名称 + 定义]</span>
+- <span class="sn-blue" data-sisenote-color="blue">概念：【名称 + 一句话定义】</span>
+- <span class="sn-blue" data-sisenote-color="blue">概念：【名称 + 一句话定义】</span>
 
 ### 2. 核心重点
 
-- <span class="sn-red" data-sisenote-color="red">重点：[关键结论]</span>
+- <span class="sn-red" data-sisenote-color="red">重点：【必须记住的核心结论或常考考点】</span>
+- <span class="sn-red" data-sisenote-color="red">重点：【关键规律或高频用法】</span>
 
 ### 3. 分析思路
 
-- <span class="sn-green" data-sisenote-color="green">思路：[方法或步骤]</span>
+- <span class="sn-green" data-sisenote-color="green">思路：【解决这类问题的步骤与方法】</span>
+- ☐ 第一步：【填写】　☐ 第二步：【填写】　☐ 第三步：【填写】
 
 ### 4. 易错提醒
 
-- <span class="sn-yellow" data-sisenote-color="yellow">易错：[需要注意的地方]</span>
+- <span class="sn-yellow" data-sisenote-color="yellow">易错：【容易混淆或遗漏的地方】</span>
+- <span class="sn-yellow" data-sisenote-color="yellow">待记：【需要反复记忆的细节】</span>
 
 ## 三、补充与延伸
 
 普通正文放在这里，不需要每句话都标色。只有真正需要强调的内容才做四色标注。
 
-- 补充要点一
-- 补充要点二
+- 补充要点一：【填写相关但次要的信息】
+- 补充要点二：【填写与其他知识的联系】
+- 延伸阅读或参考：【填写出处 / 链接 / 书名】
 
-## 四、总结
+## 四、挖空自测
 
-用一两句话归纳这篇笔记最核心的结论。
+遮住答案，用自己的话复述后再核对，把笔记从「看过」变成「记住」。
+
+1. 本主题最核心的结论是【填写】，它解决的核心问题是【填写】。
+2. 最容易出错的地方是【填写】，下次遇到要先检查【填写】。
+
+## 五、总结
+
+用一两句话归纳这篇笔记最核心的结论，作为日后复习时第一眼看到的「速记卡」。

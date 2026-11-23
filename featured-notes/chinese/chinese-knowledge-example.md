@@ -1,8 +1,8 @@
 ---
 layout: default
-title: 语文知识笔记示例
+title: 文言实词「之」的用法整理
 description: 以文言实词「之」为例，展示一词多义的归纳、辨析与易错提醒的原创知识笔记。
-category: 语文
+category: 语文人文
 tags:
   - 语文
   - 文言实词
