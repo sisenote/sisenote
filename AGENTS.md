@@ -41,3 +41,12 @@
 ## 5. 验证
 
 - Jekyll 构建 0 报错；站内链接（走 baseurl）全部命中；`node --check assets/js/copy.js`；logo 三条 `cmp` 一致。
+
+## 6. 搜索引擎收录（SEO 埋点）
+
+- 参数在 `_config.yml` 的 `seo:` 块，输出全在 `_layouts/default.html` head；详情见 `docs/publishing-guide.md` §七。
+- ⛔ **站点验证 token 绑定域名**：必须为 `sisenote.github.io` 单独验证，禁止复制官网 `sisenote.com` 的百度/360 token。留空 = 不输出 —— Liquid 空字符串是 truthy，判断必须写 `!= empty`，裸 `if` 会输出 `content=""` ⇒ 验证失败。
+- **本站刻意不加 `sitemap.xml`**（2026-11-24 定）。收录靠：静态 HTML 全文可抓 + `robots.txt` 的 `Allow: /` + 每页 `index,follow` + canonical + 全站互链（1640 链接 0 断链）+ JSON-LD。⛔ 别在 robots.txt 里写指向不存在 sitemap 的 `Sitemap:` 行。
+- GA / 百度统计只统计流量、不促收录。统计代码结构复用 `sisenote-web/index.html` 的「空闲加载 + GA 失败回退百度」，别删回退分支。
+- 改 layout 后必验：`robots.txt` 无 Sitemap 行、每页 `index,follow` 与 canonical 正确、JSON-LD 可解析且含 Organization/WebSite（文章页含 Article）、统计脚本 `node --check`、`sitemap.xml` 不存在。
+- **迁移预案**：本站未来并入 `sisenote.com` 官网首页。切换只改 `_config.yml` 的 `url`/`baseurl` 两行（→ `https://sisenote.com` / `""`），canonical + 站内链接 + robots 自动一起切；github.io 旧页变 canonical 指向官网的过渡页 ⇒ 不产生重复内容。迁移时验证 token 作废需换官网域名的值、内容并入官网已有 sitemap；统计 ID 跨域名通用不用改。

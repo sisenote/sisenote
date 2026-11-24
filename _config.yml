@@ -7,6 +7,11 @@ description: 四色笔记官方原创模板与精选知识笔记。让知识有�
 # GitHub Pages 对外访问地址：https://sisenote.github.io/sisenote/
 # url = 站点域名；baseurl = 仓库名子路径（以 / 开头、结尾不带 /）。
 # 所有站内链接与静态资源都通过 site.baseurl 生成，canonical 通过 site.url + site.baseurl 生成。
+#
+# ⚠️ 迁移预案：本站未来并入 sisenote-web 官网首页。切换当天只需把下面两行改为
+#      url: "https://sisenote.com"   /   baseurl: ""
+#    重新部署 —— canonical、站内链接、robots 会一起切到官网，
+#    旧 github.io 页面自动变成「canonical 指向官网的过渡页」，不会产生重复内容。
 url: "https://sisenote.github.io"
 baseurl: "/sisenote"
 
@@ -24,3 +29,25 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+
+# ─── 搜索引擎收录 / 统计 ───────────────────────────────────────────
+# ⚠️ 站点验证 token 与「域名」绑定：必须在各站长平台为 sisenote.github.io
+#    单独验证后取回 HTML 标签里的 content 值填进来。
+#    ⛔ 不要复用 sisenote.com 官网的百度/360 token —— 跨域名验证不通过。
+#    留空 = 对应 meta 不输出；填入后重新部署即生效，注释可删。
+seo:
+  # 百度搜索资源平台 https://ziyuan.baidu.com/ → 添加网站 sisenote.github.io → HTML 标签验证
+  baidu_site_verification: ""
+  # 360 搜索站长平台 https://zhanzhang.so.com/ → HTML 标签验证
+  so_site_verification: ""
+  # Google Search Console https://search.google.com/search-console → 网址前缀 → HTML 标签验证
+  google_site_verification: ""
+  # Bing Webmaster Tools https://www.bing.com/webmasters → HTML 标签验证
+  bing_site_verification: ""
+
+  # 统计 ID：与官网同一运营主体，可跨域名复用。仅统计流量，⛔ 不直接促进收录。
+  ga_measurement_id: "G-QVXF48FWK4"
+  baidu_tongji_id: "577b161c27f65f775145196817b80efe"
+
+  # 社交分享封面：沿用官网 OG 图，避免本站再造一张（不影响收录）
+  og_image: "https://sisenote.com/og-cover.jpg"

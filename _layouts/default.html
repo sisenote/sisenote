@@ -2,12 +2,125 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description | escape }}">
-  <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+  <meta name="keywords" content="四色笔记,SiSeNote,官方模板,精选笔记,结构化笔记,四色标注,学习笔记,知识整理,复习方法{% if page.tags %},{{ page.tags | join: ',' }}{% endif %}">
+  <meta name="robots" content="index,follow">
+
+  <!-- 站点验证：token 绑定域名，必须为本域 sisenote.github.io 单独验证后填入 _config.yml。
+       ⛔ 不要复制官网 sisenote.com 的百度/360 token —— 跨域名验证不通过。留空则不输出。 -->
+  {% if site.seo.baidu_site_verification != empty %}
+  <meta name="baidu-site-verification" content="{{ site.seo.baidu_site_verification }}">
+  {% endif %}
+  {% if site.seo.so_site_verification != empty %}
+  <meta name="360-site-verification" content="{{ site.seo.so_site_verification }}">
+  {% endif %}
+  {% if site.seo.google_site_verification != empty %}
+  <meta name="google-site-verification" content="{{ site.seo.google_site_verification }}">
+  {% endif %}
+  {% if site.seo.bing_site_verification != empty %}
+  <meta name="msvalidate.01" content="{{ site.seo.bing_site_verification }}">
+  {% endif %}
+
+  {% assign page_url = site.url | append: site.baseurl | append: page.url %}
+  <link rel="canonical" href="{{ page_url }}">
   <link rel="icon" type="image/svg+xml" href="{{ site.baseurl }}/assets/images/favicon.svg">
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
+
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:type" content="{% if page.type == 'template' or page.type == 'featured' %}article{% else %}website{% endif %}">
+  <meta property="og:site_name" content="四色笔记 · 官方模板与精选笔记">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta property="og:description" content="{{ page.description | default: site.description | escape }}">
+  <meta property="og:url" content="{{ page_url }}">
+  <meta property="og:image" content="{{ site.seo.og_image }}">
+  <meta property="og:image:alt" content="四色笔记官方模板与精选笔记">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta name="twitter:description" content="{{ page.description | default: site.description | escape }}">
+  <meta name="twitter:image" content="{{ site.seo.og_image }}">
+
+  <!-- 结构化数据：全站 Organization + WebSite，文章页再挂 Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "{{ site.url }}{{ site.baseurl }}/#organization",
+        "name": "四色笔记",
+        "alternateName": "SiSeNote",
+        "url": "https://sisenote.com/"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "{{ site.url }}{{ site.baseurl }}/#website",
+        "url": "{{ site.url }}{{ site.baseurl }}/",
+        "name": {{ site.title | jsonify }},
+        "inLanguage": "zh-CN",
+        "publisher": { "@id": "{{ site.url }}{{ site.baseurl }}/#organization" }
+      }
+      {% if page.type == 'template' or page.type == 'featured' %}
+      ,{
+        "@type": "Article",
+        "@id": "{{ page_url }}#article",
+        "headline": {{ page.title | jsonify }},
+        "description": {{ page.description | jsonify }},
+        "url": {{ page_url | jsonify }},
+        "mainEntityOfPage": { "@type": "WebPage", "@id": {{ page_url | jsonify }} },
+        "inLanguage": "zh-CN",
+        "author": { "@id": "{{ site.url }}{{ site.baseurl }}/#organization" },
+        "publisher": { "@id": "{{ site.url }}{{ site.baseurl }}/#organization" }
+      }
+      {% endif %}
+    ]
+  }
+  </script>
+
+  <!-- 统计：空闲加载，不影响首屏；GA 不通自动回退百度（判据与踩坑见 sisenote-web/index.html）。
+       ⛔ 统计只统计流量，不直接促进收录；本站靠静态全文可抓 + robots Allow + index,follow + 互链被收录。 -->
+  {% if site.seo.ga_measurement_id or site.seo.baidu_tongji_id %}
+  <script>
+  (function () {
+    var GA_ID = {{ site.seo.ga_measurement_id | jsonify }};
+    var BAIDU_ID = {{ site.seo.baidu_tongji_id | jsonify }};
+    var TIMEOUT = 2000;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    if (GA_ID) gtag('config', GA_ID);
+
+    function loadScript(src) {
+      return new Promise(function (resolve, reject) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        var t = setTimeout(function () { s.remove(); reject(new Error('timeout')); }, TIMEOUT);
+        s.onload = function () { clearTimeout(t); resolve(true); };
+        s.onerror = function () { clearTimeout(t); s.remove(); reject(new Error('error')); };
+        document.head.appendChild(s);
+      });
+    }
+    function loadBaidu() {
+      window._hmt = window._hmt || [];
+      return loadScript('https://hm.baidu.com/hm.js?' + BAIDU_ID);
+    }
+    function initAnalytics() {
+      if (GA_ID) {
+        loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID)
+          .catch(function () { if (BAIDU_ID) return loadBaidu(); });
+      } else if (BAIDU_ID) {
+        loadBaidu();
+      }
+    }
+    if ('requestIdleCallback' in window) requestIdleCallback(initAnalytics);
+    else setTimeout(initAnalytics, 1500);
+  })();
+  </script>
+  {% endif %}
 </head>
 <body>
   <header class="sn-header">
